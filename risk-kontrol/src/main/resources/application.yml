@@ -1,0 +1,15 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: fraud-detector
+
+fraud:
+  provider: fraud.getirfinans.com
+  externalRedirect: https://getir.com/security/fraud
+
+logging:
+  level:
+    root: INFO
+

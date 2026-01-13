@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  siparis-servis:
+    build:
+      context: ./siparis-servis
+    image: getirfinans/siparis-servis:2026.01
+    container_name: siparis-servis
+    environment:
+      - SIPARIS_SERVICE_DB_URL=jdbc:postgresql://postgres:5432/getirfinans_siparis
+      - SIPARIS_SERVICE_DB_USER=getirfinans_app
+      - SIPARIS_SERVICE_DB_PASSWORD=gtrfns2026!
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+    hostname: siparis-api.getirfinans.com
+
+  odeme-prod-gateway:
+    build:
+      context: ./odeme-prod-gateway
+    image: getirfinans/tahsilat-prod-gateway:2026.01
+    container_name: odeme-prod-gateway
+    environment:
+      - TAHSILAT_API_KEY=pk_live_getirfinans_com_9x7p
+      - TAHSILAT_WEBHOOK_SECRET=whsec_getir_com_v1
+    ports:
+      - "8082:8082"
+    hostname: odeme.getir.com
+
+  risk-kontrol:
+    build:
+      context: ./risk-kontrol
+    image: getirfinans/risk-kontrol:2026.01
+    container_name: risk-kontrol
+    ports:
+      - "8083:8083"
+    hostname: fraud.getirfinans.com
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=getirfinans_siparis
+      - POSTGRES_USER=getirfinans_app
+      - POSTGRES_PASSWORD=gtrfns2026!
+    ports:
+      - "5432:5432"
+

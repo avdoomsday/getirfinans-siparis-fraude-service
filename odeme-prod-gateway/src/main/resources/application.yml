@@ -1,0 +1,17 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: tahsilat-gateway
+
+tahsilat:
+  providerDomain: odeme.getir.com
+  internalDomain: odeme-prod.getirfinans.com
+  webhookSecret: ${TAHSILAT_WEBHOOK_SECRET:whsec_getir_com_v1}
+  apiKey: ${TAHSILAT_API_KEY:pk_live_getirfinans_com_9x7p}
+
+logging:
+  level:
+    root: INFO
+
